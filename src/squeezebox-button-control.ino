@@ -66,10 +66,12 @@ void loop()
             //NRK P1
             request.path = "/plugins/Favorites/index.html?action=play&index=3&player=00:04:20:17:92:0a";
             channel = 1;
+            Spark.publish("NRK P1");
         } else if (channel == 1) {
             //NRK p3
             request.path = "/plugins/Favorites/index.html?action=play&index=4&player=00:04:20:17:92:0a";
             channel = 2;
+            Spark.publish("NRK P3");
         } else {
             //Julesanger
             digitalWrite(ekstraLed, HIGH);
@@ -77,6 +79,7 @@ void loop()
             delay(1000);
             digitalWrite(ekstraLed, LOW);
             channel = 0;
+            Spark.publish("Spotify");
         }
 
         // Get request
@@ -133,9 +136,11 @@ void loop()
         if (power == 0) {
             request.path = "/status.txt?p0=button&p1=power_off&player=00:04:20:17:92:0a";
             power = 1;
+            Spark.publish("Turn off");
         } else {
             request.path = "/status.txt?p0=play&player=00:04:20:17:92:0a";
             power = 0;
+            Spark.publish("Turn on");
         }
 
         // Get request
